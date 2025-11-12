@@ -1,0 +1,13 @@
+train: ../data/images/train
+val: ../data/images/valid
+test: ../data/images/test
+
+nc: 3
+names:
+  - glioma
+  - meningioma
+  - pituitary
+
+roboflow:
+  workspace: brain-tumor
+download: false

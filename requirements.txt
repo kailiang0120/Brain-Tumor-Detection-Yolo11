@@ -1,0 +1,11 @@
+# core packages
+opencv-python>=4.9.0
+albumentations>=1.4.5
+ultralytics>=8.2.0
+# torch stack
+torch>=2.2.0
+torchvision>=0.17.0
+
+# ui
+gradio>=4.29.0
+pillow>=10.3.0
