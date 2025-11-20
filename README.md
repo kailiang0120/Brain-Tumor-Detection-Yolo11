@@ -1,80 +1,71 @@
-# BrainTumor — YOLO-based Brain Tumor Detection
+# Brain Tumor Detection with YOLOv11
 
-A compact repository for preparing, training, and running inference for brain tumor detection on MRI/CT images (YOLO-style detector pipeline). This repo contains dataset preparation helpers, training scripts, and a simple Gradio inference UI.
+This project demonstrates a fine-tuned **YOLOv11** model for detecting brain tumors in MRI/CT scan images. It includes a training notebook and an interactive web-based inference interface built with **Gradio**.
 
-Key files
-- `configs/yolo11.yaml` — data/config for training
-- `scripts/train_yolo11.py` — training entrypoint
-- `app/inference_ui.py` — small Gradio app for local inference
-- `scripts/prepare_brain_tumor_dataset.py` — (if present) data conversion/prep helpers
+## 🌟 Features
 
-Quick facts
-- Dataset: Brain tumor MRI dataset (public sources; see scripts/notes)
-- Model: YOLO-style detector (configurable in `scripts/train_yolo11.py`)
-- Environment: Conda environment `gemma` is recommended
+- **State-of-the-art Detection**: Utilizes the YOLOv11 architecture fine-tuned for medical imaging.
+- **Interactive UI**: User-friendly web interface to upload images and visualize detection results instantly.
+- **Adjustable Parameters**: Real-time control over Confidence and NMS IoU thresholds.
+- **GPU Support**: Automatically detects and utilizes CUDA-enabled GPUs for faster inference.
 
-Repository structure
-```
-.
-├── app/                   # inference UI and utilities
-├── configs/               # model and data configs
-├── scripts/               # data prep and training scripts
-├── data/                  # (gitignored) dataset root — keep local
-├── runs_brain_tumor/      # training outputs (gitignored)
-└── README.md
-```
+## 🛠️ Installation
 
-Requirements
-- Python 3.8+ (prefer 3.9/3.10)
-- GPU recommended for training (CUDA/cuDNN)
-- Activate environment:
-```
-conda activate gemma
-pip install -r requirements.txt
-```
+### Prerequisites
 
-Data placement (important)
-- The repository ignores the `data/` folder to avoid committing large datasets. Place your dataset under `data/` locally.
-- Example recommended layout:
-```
-data/
-  brain_tumor_prepared/
-    images/
-      train/
-      val/
-      test/
-    labels/
-      train/
-      val/
-      test/
-    dataset_summary.json
-```
+- Python 3.9 or higher
+- [Optional] CUDA-enabled GPU for faster training and inference
 
-Preparing the dataset
-- If you have raw source files (e.g., from Kaggle/Roboflow), use the provided scripts (if available) or adapt your own converter to produce the `images/` and `labels/` structure above. The repository previously used a prep script that produced YOLO-format labels.
+### Steps
 
-Training
-- Basic example (adjust flags in `scripts/train_yolo11.py` or pass CLI args):
-```
-python scripts/train_yolo11.py \
-  --data configs/yolo11.yaml \
-  --model yolo11m.pt \
-  --project runs_brain_tumor \
-  --name yolo11_brain_tumor \
-  --epochs 120 \
-  --batch 24 \
-  --img-size 640
-```
-- Check `runs_brain_tumor/{name}` for checkpoints, metrics, and tensorboard logs.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/kailiang0120/YOLOv11-Finetune.git
+   cd YOLOv11-Finetune
+   ```
 
-Inference (local UI)
-- Run the Gradio-based inference UI:
-```
-conda activate gemma
-pip install -r requirements.txt
+2. **Install dependencies**
+   It is recommended to use a virtual environment.
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## 🚀 Usage
+
+### Running the Inference UI
+
+To start the web application for tumor detection:
+
+```bash
 python app/inference_ui.py
 ```
-- By default the app prints a local URL (e.g., `http://127.0.0.1:7860`). Override defaults with environment variables:
-  - `MODEL_PATH` — path to model weights (default `best.pt`)
-  - `HOST`, `PORT` — bind address/port
-  - `MAX_LONG_SIDE` — resize long side before passing to the model
+
+After running the command, access the interface in your browser at:
+**http://127.0.0.1:7860**
+
+### Training
+
+If you wish to retrain or fine-tune the model on your own dataset, refer to the Jupyter notebook located in:
+`notebooks/yolov11.ipynb`
+
+## 📂 Project Structure
+
+- **`app/`**: Contains the source code for the Gradio inference application.
+- **`configs/`**: Configuration files for the model and training.
+- **`data/`**: Directory for storing dataset images (train/val/test).
+- **`notebooks/`**: Jupyter notebooks used for data exploration and model training.
+- **`yolov11m_finetune.pt`**: The pre-trained/fine-tuned model weights.
+- **`requirements.txt`**: List of Python dependencies.
+
+## 🔧 Configuration
+
+The inference app supports environment variables for easy configuration:
+
+- `MODEL_PATH`: Path to the `.pt` model file (default: `yolov11m_finetune.pt`).
+- `PORT`: Port to run the Gradio app on (default: `7860`).
+- `HOST`: Host address (default: `127.0.0.1`).
+
+Example:
+```bash
+MODEL_PATH=my_custom_model.pt PORT=8080 python app/inference_ui.py
+```

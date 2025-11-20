@@ -38,7 +38,7 @@ env/
 *.pth
 weights/
 models/
-runs_brain_tumor/
+yolo11_finetune_eval/
 
 # OS files
 .DS_Store

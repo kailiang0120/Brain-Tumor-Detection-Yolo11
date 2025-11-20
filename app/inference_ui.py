@@ -23,7 +23,7 @@ def get_model() -> YOLO:
 	if _CACHED_MODEL is not None:
 		return _CACHED_MODEL
 
-	model_path = os.getenv("MODEL_PATH", "best.pt")
+	model_path = os.getenv("MODEL_PATH", "yolov11m_finetune.pt")
 	if not os.path.exists(model_path):
 		raise FileNotFoundError(f"Model weights not found at: {model_path}")
 
