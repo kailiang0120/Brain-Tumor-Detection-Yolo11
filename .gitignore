@@ -34,8 +34,6 @@ env/
 .mypy_cache/
 
 # Model weights / artifacts
-*.pt
-*.pth
 weights/
 models/
 yolo11_finetune_eval/
