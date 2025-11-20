@@ -20,8 +20,8 @@ This project demonstrates a fine-tuned **YOLOv11** model for detecting brain tum
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/kailiang0120/YOLOv11-Finetune.git
-   cd YOLOv11-Finetune
+   git clone https://github.com/kailiang0120/Brain-Tumor-Detection-Yolo11.git
+   cd Brain-Tumor-Detection-Yolo11
    ```
 
 2. **Install dependencies**
